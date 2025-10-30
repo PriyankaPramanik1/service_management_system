@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title%></title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- css custom -->
+  <link rel="stylesheet" href="/css/managerDashboard.css">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <%-include('./layouts/adminSidebar')%>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+          <div class="page-title">
+            <h1>Bookings Overview</h1>
+            <p>Welcome back! Here all the bookings are listed.</p>
+          </div>
+          <div class="header-actions">
+           
+          </div>
+        </div>
+                <!-- Content Area -->
+                <div class="content-area">
+                  <!-- Projects Table -->
+                  <div class="content-card">
+                    <div class="card-header">
+
+                      <h3>Bookings <span>(<%=bookingsCount %>)</span></h3>
+
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th>S.No</th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Appliance</th>
+                            <th>Service</th>
+                            <th>Preferred Date</th>
+                            <th>Status</th>
+                            <th>Assigned To</th>
+                            <th>Assigned By</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% if (booking.length> 0) { %>
+                            <% booking.forEach((item, index)=> { %>
+                              <tr>
+                                <td>
+                                  <%= index + 1 %>
+                                </td>
+                                <td>
+                                  <%= item.name %>
+                                </td>
+                                <td>
+                                  <%= item.email %>
+                                </td>
+                                <td>
+                                  <%= item.phone %>
+                                </td>
+                                <td>
+                                  <%= item.applianceType %>
+                                </td>
+                                <td>
+                                  <%= item.serviceType %>
+                                </td>
+                                <td>
+                                  <%= new Date(item.preferredDate).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                  <%= item.status %>
+                                </td>
+                                <td>
+                                  <% const assignedTechnician=users.find(technician=> technician.id.toString() ==
+                                    item.assignedTo); %>
+                                    <%= assignedTechnician ? assignedTechnician.name : '' %>
+                                </td>
+                                <td>
+                                  <% const assignedByTechnician=users.find(technician=> technician.id.toString() ==
+                                    item.assignedBy); %>
+                                    <%= assignedByTechnician ? assignedByTechnician.name : '' %>
+                                </td>
+
+                              </tr>
+                              <% }) %>
+                                <% } else { %>
+                                  <tr>
+                                    <td colspan="12" class="text-center py-4">
+                                      <div class="d-flex flex-column align-items-center">
+                                        <h4 class="text-muted">No bookings found </h4>
+                                        <p class="text-muted"> </p>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <% } %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+      </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

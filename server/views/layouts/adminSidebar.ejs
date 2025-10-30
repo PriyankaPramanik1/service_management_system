@@ -1,0 +1,31 @@
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h3><i class="fas fa-chart-pie"></i> <span>Dashboard</span></h3>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+        <li class="manager"><a href="/manager/create" class="manager"><i class="fas fa-user-cog manager"></i> <span
+                    class="manager">Create Manager</span></a></li>
+        <li><a href="/promote/employee"><i class="fas fa-user-graduate"></i><span>Promote</span></a></li>
+        <li><a href="/view/booking"><i class="fas fa-calendar-check"></i> <span>View Booking</span></a></li>
+        <li><a href="/view/employee"><i class="fas fa-users"></i> <span>Employees</span></a></li>
+        <li><a href="/view/manager"><i class="fas fa-user-tie"></i> <span>Managers</span></a></li>
+        <li><a href="/service"><i class="fas fa-tools"></i> <span>Create Service</span></a></li>
+        <li><a href="/get/serviceList"><i class="fas fa-list-alt"></i> <span>View Services</span></a></li>
+    </ul>
+    <div class="user-profile">
+        <!-- <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-avatar"> -->
+        <div class="user-info">
+            <h5>
+                <%= admin.name %>
+            </h5>
+            <p>
+                <%= admin.role %>
+            </p>
+        </div>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="/admin/logout"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a></li>
+    </ul>
+    </a>
+</div>

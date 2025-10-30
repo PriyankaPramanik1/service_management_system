@@ -1,0 +1,18 @@
+const express = require('express')
+const EjsController = require('../controllers/EjsController')
+const AdminAuthCheck = require('../middleware/AdminAuthCheck')
+const ManagerAuthCheck = require('../middleware/ManagerAuthCheck')
+const AdminController = require('../controllers/AdminController')
+const ManagerController = require('../controllers/ManagerController')
+const EmployeeController=require('../controllers/employeeController')
+const router = express.Router()
+
+router.get('/admin/dashboard', AdminAuthCheck, AdminController.checkAuthAdmin, EjsController.adminDashboard)
+router.get('/manager/dashboard', ManagerAuthCheck, ManagerController.checkAuthManager, EjsController.managerDashboard)
+router.get('/manager/create', AdminAuthCheck, AdminController.checkAuthAdmin, EjsController.createManager)
+router.get('/employee/create', ManagerAuthCheck, ManagerController.checkAuthManager, EjsController.createEmployee)
+router.get('/promote/employee',AdminAuthCheck,AdminController.checkAuthAdmin,EjsController.promotePage)
+router.get('/service',AdminAuthCheck,AdminController.checkAuthAdmin,EjsController.service)
+router.get('/technician/dashboard',EjsController.employeeDashboard)
+router.get('/auth/staff/login',EjsController.login)
+module.exports = router

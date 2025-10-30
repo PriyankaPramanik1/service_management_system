@@ -1,0 +1,15 @@
+const express = require('express')
+const AdminController = require('../controllers/AdminController')
+const AdminAuthCheck = require('../middleware/AdminAuthCheck')
+const router = express.Router()
+
+router.post('/create/manager', AdminAuthCheck, AdminController.checkAuthAdmin, AdminController.createManager)
+router.post('/promote-to-manager/:id', AdminAuthCheck, AdminController.checkAuthAdmin, AdminController.promoteToManager)
+router.get('/admin/logout', AdminController.logoutAdmin)
+router.get('/view/booking', AdminAuthCheck, AdminController.getBooking)
+router.get('/view/employee', AdminAuthCheck, AdminController.viewEmployee)
+router.get('/view/manager',AdminAuthCheck,AdminController.viewManager)
+router.get('/delete/manager/:id',AdminController.deleteManager)
+router.get('/delete/employee/:id',AdminController.deleteEmployee)
+router.post('/staff/login',AdminController.staff_Login)
+module.exports = router

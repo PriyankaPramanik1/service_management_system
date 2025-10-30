@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inance - Repair and Maintenance Services</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+
+<body>
+    <!-- header section -->
+    <header class="header_section">
+        <div class="header_top">
+            <div class="container-fluid">
+                <div class="contact_nav">
+                    <% if (typeof admin !=='undefined' && admin) { %>
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>Call : <%= admin.phone %></span>
+                        </a>
+                        <a href="mailto:<%= admin.email %>">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>Email : <%= admin.email %></span>
+                        </a>
+                        <% } else if (typeof user !=='undefined' && user) { %>
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>Call : <%= user.phone %></span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span>Email : <%= user.email %></span>
+                            </a>
+                            <% } else if (typeof manager !=='undefined' && manager) { %>
+                                <a href="">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <span>Call : <%= manager.phone %></span>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <span>Email : <%= manager.email %></span>
+                                </a>
+                                <% } else if (typeof employee !=='undefined' && employee) { %>
+                                    <a href="">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <span>Call : <%= employee.phone %></span>
+                                    </a>
+                                    <a href="mailto:<%= user.email %>">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <span>Email : <%= employee.email %></span>
+                                    </a>
+                                    <% } else { %>
+                                        <a href="">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <span>Call :</span>
+                                        </a>
+                                        <a href="mailto:demo@gmail.com">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <span>Email :</span>
+                                        </a>
+                                        <% } %>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="header_bottom">
+            <div class="container-fluid">
+                <nav class="navbar sticky-top navbar-expand-lg navbar-light ">
+                    <div class="container">
+                        <a class="navbar-brand" href="index.html">
+                            <span>LOGO</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="service.html">Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact Us</a>
+                                </li>
+                            </ul>
+                            <div class="d-flex">
+                                <% if (typeof admin !=='undefined' && admin) { %>
+                                    <a href="/admin/logout" class="btn btn-login">Logout</a>
+                                    <a href="/admin/dashboard" class="btn btn-register">Admin Dashboard</a>
+                                    <% } else if (typeof user !=='undefined' && user) { %>
+                                        <a href="/admin/logout" class="btn btn-login">Logout</a>
+                                        <% if (user.role==='user' ) { %>
+                                            <a href="/user/dashboard" class="btn btn-register">User Dashboard</a>
+                                            <% } %>
+                                                <% }else if (typeof manager !=='undefined' && manager) { %>
+                                                    <a href="/logout/manager" class="btn btn-login">Logout</a>
+                                                    <% if (manager.role==='manager' ) { %>
+                                                        <a href="/manager/dashboard" class="btn btn-register">Manager
+                                                            Dashboard</a>
+                                                        <% } %>
+                                                            <% } else if (typeof employee !=='undefined' && employee) {
+                                                                %>
+                                                                <a href="/logout" class="btn btn-login">Logout</a>
+                                                                <% if (employee.role==='employee' ) { %>
+                                                                    <a href="/user/dashboard"
+                                                                        class="btn btn-register">employee Dashboard</a>
+                                                                    <% } %>
+                                                                        <% }else { %>
+                                                                            <a href="/login"
+                                                                                class="btn btn-login">Login</a>
+                                                                            <a href="/register"
+                                                                                class="btn btn-register">Register</a>
+                                                                            <% } %>
+
+                            </div>
+
+                        </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- end header section -->
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

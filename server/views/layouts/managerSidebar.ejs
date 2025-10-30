@@ -1,0 +1,25 @@
+<div class="sidebar admin">
+    <div class="sidebar-header">
+        <h3><i class="fas fa-chart-pie"></i> <span>Dashboard</span></h3>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="/manager/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+<li><a href="/employee/create"><i class="fas fa-user-plus"></i> <span>Create Employee</span></a></li>
+<li><a href="/manager/view/booking"><i class="fas fa-calendar-check"></i> <span>View Bookings</span></a></li>
+<li><a href="/manager/employee/view"><i class="fas fa-users"></i> <span>View Employees</span></a></li>
+    </ul>
+    <div class="user-profile">
+        <!-- <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-avatar"> -->
+        <div class="user-info">
+            <h5>
+                <%= manager.name %>
+            </h5>
+            <p>
+                <%= manager.role %>
+            </p>
+        </div>
+    </div>
+    <ul class="sidebar-menu">
+         <li><a href="/logout/manager"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a></li>
+    </ul>
+</div>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/managerDashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%-include('./layouts/adminSidebar')%>
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header -->
+                <div class="header">
+                    <div class="page-title">
+                        <h1>Promote technicians to managers</h1>
+                        <p>Welcome back, Here's you can promote your technicians to manager.</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="search-box">
+                        </div>
+                    </div>
+                </div>
+                <% if(success && success.length> 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                    <% } %>
+                        <% if(error && error.length> 0){ %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= error %>
+                            </div>
+                            <% } %>
+                                <!-- Content Area -->
+                                <div class="content-area">
+                                    <!-- Projects Table -->
+                                        <div class="card-header">
+                                                <h3>Technicians <span>(<%= techniciansCount %>)</span></h3>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S NO.</th>
+                                                        <th>Technician Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Area</th>
+                                                        <th>Promote</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% if (user.length> 0) { %>
+                                                        <% user.forEach((item, index)=> { %>
+                                                            <tr>
+                                                                <td><%=index+1%></td>
+                                                                <td>
+                                                                    <%= item.name %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= item.email %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= item.phone %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= item.area %>
+                                                                </td>
+                                                                <td>
+                                                                    <form action="/promote-to-manager/<%= item._id %>"
+                                                                        method="post">
+                                                                        <input type="hidden" name="_method" value="PUT">
+                                                                        <button type="submit"
+                                                                            class="promote-btn">Promote to
+                                                                            Manager</button>
+                                                                    </form>
+
+                                                                </td>
+                                                            </tr>
+                                                            <% }) %>
+                                                                <% } else { %>
+                                                                    <tr>
+                                                                        <td colspan="9" class="text-center py-4">
+                                                                            <div
+                                                                                class="d-flex flex-column align-items-center">
+                                                                                <h4 class="text-muted">No users found
+                                                                                </h4>
+                                                                                <p class="text-muted">Click the "Add
+                                                                                    Users" button to
+                                                                                    create new users
+                                                                                </p>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
+    </div>
+
+    <script>
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('.table tbody tr');
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Promote button functionality
+        document.querySelectorAll('.promote-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const row = this.closest('tr');
+                const name = row.cells[0].textContent;
+
+                if (confirm(`Are you sure you want to promote ${name} to Manager?`)) {
+                    // In a real application, you would send an API request here
+                    alert(`${name} has been promoted to Manager!`);
+                    // You might want to remove the row or update its status
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

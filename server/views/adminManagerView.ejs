@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- css custom -->
+    <link rel="stylesheet" href="/css/managerDashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%-include('./layouts/adminSidebar')%>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header -->
+                <div class="header">
+                    <div class="page-title">
+                        <h1>All Managers Overview</h1>
+                        <p>Welcome back! Here all the managers are listed.</p>
+                    </div>
+                    <div class="header-actions">
+                        
+                    </div>
+                </div>
+
+                <% if(success && success.length> 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                    <% } %>
+                        <% if(error && error.length> 0){ %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= error %>
+                            </div>
+                            <% } %>
+
+                                <!-- Content Area -->
+                                <div class="content-area">
+                                    <!-- Left Column -->
+                                    <div class="left-column">
+                                        <!-- Projects Table -->
+                                        <div class="content-card">
+                                            <div class="card-header">
+                                                <h3>Managers <span>(<%=managersCount %>)</span></h3>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S NO.</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Role</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% manager.forEach((manager,index)=> { %>
+                                                            <tr>
+                                                                <td>
+                                                                    <%= index+1%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= manager.name %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= manager.email %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= manager.phone %>
+                                                                </td>
+                                                                <td>
+                                                                    <%=manager.role %>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="/delete/manager/<%= manager._id %>"
+                                                                        class="btn btn-danger">Delete</a>
+                                                                </td>
+                                                                </td>
+                                                            </tr>
+                                                            <% }) %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
