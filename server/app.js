@@ -1,13 +1,20 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cors = require('cors')
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true 
+}));
+
 const jwt = require('jsonwebtoken')
 
 const ejs = require('ejs');
 const path = require('path')
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
-const cors=require('cors')
+
 
 const DbConnection = require('./app/config/dbCon')
 DbConnection()
@@ -122,11 +129,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, './uploads')))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(cors({
-  origin: 'http://localhost:3000', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true 
-}));
+
 
 
 const ejsRouter = require('./app/router/ejsRouter')

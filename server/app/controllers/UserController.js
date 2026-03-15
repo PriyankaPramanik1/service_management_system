@@ -206,17 +206,16 @@ class UserController {
     }
 
     async logoutUser(req, res) {
-        try {
-            res.clearCookie('userToken')
-            res.redirect('http://localhost:3000')
-            return res.status(StatusCode.CREATED).json({
-                message: "User Logout Successfully!"
-            })
-        } catch (error) {
-            console.log(error);
-
-        }
+    try {
+        res.clearCookie('userToken');
+        return res.redirect('http://localhost:3000');
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Logout failed"
+        });
     }
+}
 
 
     // Create a new feedback
