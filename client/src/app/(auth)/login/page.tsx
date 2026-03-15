@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -14,32 +15,44 @@ import {
 import { useAuth } from "../../hook/authContext";
 import { useRouter } from "next/navigation";
 import { LockPerson } from "@mui/icons-material";
+
 const VIBRANT_GREEN = "#00a878";
+
 const Login = () => {
   const { login, loading } = useAuth();
   const router = useRouter();
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
   const [error, setError] = useState("");
   const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
     setIsClient(true);
-  });
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
     const result = await login(credentials);
     console.log(result);
+
     if (!result.success) {
       setError(result.message);
+    } else {
+      // redirect after successful login
+      router.push("/dashboard");
     }
   };
+
   if (!isClient) {
     return null;
   }
+
   return (
     <Container component="main" maxWidth="sm">
       <Box
@@ -114,12 +127,8 @@ const Login = () => {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "rgba(0, 0, 0, 0.02)",
-                    "&:hover fieldset": {
-                      borderColor: VIBRANT_GREEN,
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: VIBRANT_GREEN,
-                    },
+                    "&:hover fieldset": { borderColor: VIBRANT_GREEN },
+                    "&.Mui-focused fieldset": { borderColor: VIBRANT_GREEN },
                   },
                 }}
               />
@@ -142,12 +151,8 @@ const Login = () => {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "rgba(0, 0, 0, 0.02)",
-                    "&:hover fieldset": {
-                      borderColor: VIBRANT_GREEN,
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: VIBRANT_GREEN,
-                    },
+                    "&:hover fieldset": { borderColor: VIBRANT_GREEN },
+                    "&.Mui-focused fieldset": { borderColor: VIBRANT_GREEN },
                   },
                 }}
               />
@@ -185,12 +190,8 @@ const Login = () => {
               </Button>
 
               <Box sx={{ textAlign: "center", mt: 2 }}>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ mb: 1 }}
-                >
-                  Don't have an account?
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                  Don&apos;t have an account?
                 </Typography>
                 <Button
                   href="/register"
