@@ -3,9 +3,13 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: [
+    'http://localhost:3000', // Local dev
+    'https://service-management-system-6ocf.onrender.com', // Backend self (Render)
+    // 'https://your-vercel-project.vercel.app' // < Vercel URL 
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true 
+  credentials: true
 }));
 
 const jwt = require('jsonwebtoken')
